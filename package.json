@@ -16,7 +16,7 @@
   ],
   "author": "Muhammad Haris Ahsan",
   "license": "ISC",
-  "dependencies": {
+  "devDependencies": {
     "nodemon": "^3.1.3"
   }
 }
