@@ -5,19 +5,24 @@ dotenv.config({
     path: "./env",
 });
 
+const port = process.env.PORT || 8000;
+
 connectDB()
-    .then((result) => {
-        app.listen(process.env.PORT, () => {
-            console.log(
-                `*---- Server listening on port ${process.env.PORT} ----*`
-            );
+    .then(() => {
+        app.on("error", (error) => {
+            console.log("*---- ERROR: ", error);
+            process.exit(1);
+        });
+
+        app.listen(port, () => {
+            console.log(`*---- Server listening on port: ${port} ----*`);
         });
 
         console.log("*---- CONNECTED TO MONGODB ----*");
     })
     .catch((err) => {
-        console.log("*---- MONGODB CONNECTION ERROR: ", err);
-        process.exit(1);
+        console.log("*---- MONGODB CONNECTION FAILED: ", err);
+        // process.exit(1);
     });
 
 /*
