@@ -1,6 +1,6 @@
 const asyncHandler = (requestHandler) => {
-    (req, res, next) => {
-        Promise.resolve(requestHandler(req, res, next)).catch((err) => {
+    async (req, res, next) => {
+        await Promise.resolve(requestHandler(req, res, next)).catch((err) => {
             next(err);
         });
         // try {
@@ -12,3 +12,19 @@ const asyncHandler = (requestHandler) => {
 };
 
 export { asyncHandler };
+
+// const asyncHandler = (requestHandler) => {
+//     async (req, res, next) => {
+//         try {
+//             await requestHandler(req, res, next)
+//         } catch (err) {
+//             res.status(err.code || 500).json({
+//                 success: false,
+//                 message: err.message || "Internal Server Error"
+
+//             })
+//         }
+//     };
+// };
+
+// export { asyncHandler };
